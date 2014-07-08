@@ -1,4 +1,10 @@
+Gemfile.lock
+
 *.png
 *.pdf
 *.svg
 *.sqlite3
+
+/vendor/
+/.bundle/
+
