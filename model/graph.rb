@@ -13,7 +13,7 @@ class Graphs < Sequel::Model
 			io.close_write
 			io.read
 		end
-		url
+		url.chomp
 	end
 	
 	require 'digest/md5'

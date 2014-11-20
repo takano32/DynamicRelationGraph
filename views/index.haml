@@ -19,24 +19,25 @@
       %td
         %input{:type => "submit"}
 
+
+- @png = Relations.to_png
+%a{:href => url = Graphs.gyazo(@png) + '.png'}
+  = url
+%p
+  = "MD5: #{Graphs.digest(@png)}"
+%br
+- require 'base64'
+%img{'src' => 'data:image/png;base64,' + Base64.encode64(@png), 'width' => '100%'}
+%br
+%a{:href => 'http://github.com/takano32/DynamicRelationGraph/'}
+  http://github.com/takano32/DynamicRelationGraph/
 %form{:method => 'POST', :action => '/delete'}
   %input{:type => "hidden", :name => "_method", :value => "PUT"}
-  %input{:type => 'submit', :value => '消す'}
+  %input{:type => 'submit', :value => 'チェックした関係を消す'}
   %br
   - @relations.each do |r|
     %input{:type => 'checkbox', :name => "relation[]", :value => r.id}
     = r.to_s
     %br
-
-- @png = Relations.to_png
-%a{:href => url = Graphs.gyazo(@png)}
-  = url
-%p
-  = Graphs.digest(@png)
-%br
-- require 'base64'
-%img{'src' => 'data:image/png;base64,' + Base64.encode64(@png)}
-%br
-%a{:href => 'http://github.com/takano32/'}
-  http://github.com/takano32/
-
+%pre
+  = Relations.to_dot
